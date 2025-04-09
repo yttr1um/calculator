@@ -61,11 +61,11 @@ body {
     background-color: grey;
 }
 
-#equal {
+.equal {
     background-color: orangered;
     flex: 4;
 }
 
-#cancel {
+.cancel {
     background-color: red;
 }
