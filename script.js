@@ -1,3 +1,5 @@
+let topScreen = document.querySelector("#top-screen");
+let outputScreen = document.querySelector("#output-screen");
 let screen = document.querySelector("#calc-screen");
 let buttons = document.querySelectorAll("button");
 let existingOperation =  false;
@@ -13,28 +15,37 @@ function calculate(problem) {
         }
     })
 
+    //if no operation was used then print the number again.
     if (operationUsed === undefined) return +problem;
 
     //get the 2 numbers in the problem.
     let numbers = problem.split(operationUsed);
 
     //calculate!!!!
+    let result;
     switch(operationUsed) {
         case "+":
-            return +numbers[0] + +numbers[1];
+            result = +numbers[0] + +numbers[1];
             break;
 
         case "-":
-            return +numbers[0] - +numbers[1];
+            result = +numbers[0] - +numbers[1];
             break;
 
         case "*":
-            return +numbers[0] * +numbers[1];
+            result =  +numbers[0] * +numbers[1];
             break;
 
         case "/":
-            return +numbers[0] / +numbers[1];
+            result = +numbers[0] / +numbers[1];
             break;
+    }
+
+    //check if a number is a float and return it with 1 dp.
+    if (result%1 !== 0) {
+        return Math.round(result*1000)/1000;
+    } else {
+        return result;
     }
 }
 
@@ -47,39 +58,44 @@ buttons.forEach(button => {
             case "number":
                 let number = document.createElement("p");
                 number.textContent = target.value;
-                screen.appendChild(number);
+                topScreen.appendChild(number);
                 break;
 
             case "operation":
                 if (!existingOperation) {
                     let operation = document.createElement("p");
                     operation.textContent = target.value;
-                    firstNum = screen.textContent;
-                    screen.appendChild(operation);
+                    firstNum = topScreen.textContent;
+                    topScreen.appendChild(operation);
                     existingOperation = true;
                 }
                 break;
-
+            
             case "cancel":
-                for (let text of Array.from(screen.children)) {
+                Array.from(topScreen.children).forEach(text => {
                     text.remove();
-                }
+                })
+
+                Array.from(outputScreen.children).forEach(text => {
+                    text.remove();
+                })
+
                 existingOperation = false;
                 break;
 
             case "equal":
-                let problem = screen.textContent;
+                //has to clear the result screen incase theres already a result there.
+                let problem = topScreen.textContent;
+
+                //clearing the output screen.
+                for (let output of Array.from(outputScreen.children)) {
+                    output.remove();
+                }
                 
                 let result = document.createElement("p");
                 result.textContent = calculate(problem);
 
-                //clear the screen.
-                for (let text of Array.from(screen.children)) {
-                    text.remove();
-                }
-                existingOperation = false;
-
-                screen.appendChild(result);
+                outputScreen.appendChild(result);
                 break;
 
         }

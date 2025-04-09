@@ -23,15 +23,27 @@ body {
 }
 
 #calc-screen {
+    border-radius: 10px 10px 0 0;
+    box-sizing: border-box;
     background-color: #330000;
     flex: 1;
 
     display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+    flex-direction: column;
+    justify-content: space-between;
 
     color: red;
     font-size: 32px;
+    padding: 10px;
+}
+
+#top-screen {
+    display: flex;
+}
+
+#output-screen {
+    display: flex;
+    justify-content: flex-end;
 }
 
 #calc-buttons {
