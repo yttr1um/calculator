@@ -13,6 +13,8 @@ function calculate(problem) {
         }
     })
 
+    if (operationUsed === undefined) return +problem;
+
     //get the 2 numbers in the problem.
     let numbers = problem.split(operationUsed);
 
