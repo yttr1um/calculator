@@ -15,7 +15,7 @@ body {
     background-color: #333333;
 
     height: 600px;
-    width: 400px;
+    width: 350px;
 
     display: flex;
     flex-direction: column;
@@ -44,6 +44,7 @@ body {
 #output-screen {
     display: flex;
     justify-content: flex-end;
+    color: rgb(170, 0, 0);
 }
 
 #calc-buttons {

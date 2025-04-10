@@ -59,6 +59,16 @@ buttons.forEach(button => {
                 let number = document.createElement("p");
                 number.textContent = target.value;
                 topScreen.appendChild(number);
+
+                for (let output of Array.from(outputScreen.children)) {
+                    output.remove();
+                }
+
+                let problem = topScreen.textContent;
+                let result = document.createElement("p");
+                result.textContent = calculate(problem);
+
+                outputScreen.appendChild(result);
                 break;
 
             case "operation":
@@ -85,17 +95,22 @@ buttons.forEach(button => {
 
             case "equal":
                 //has to clear the result screen incase theres already a result there.
-                let problem = topScreen.textContent;
+                // let problem = topScreen.textContent;
+                let outputValue = outputScreen.textContent
 
                 //clearing the output screen.
-                for (let output of Array.from(outputScreen.children)) {
-                    output.remove();
-                }
-                
-                let result = document.createElement("p");
-                result.textContent = calculate(problem);
+                Array.from(topScreen.children).forEach(text => {
+                    text.remove();
+                })
 
-                outputScreen.appendChild(result);
+                Array.from(outputScreen.children).forEach(text => {
+                    text.remove();
+                })
+                existingOperation = false;
+
+                let output = document.createElement("p");
+                output.textContent = outputValue;
+                topScreen.appendChild(output);
                 break;
 
         }
