@@ -75,12 +75,14 @@ buttons.forEach(button => {
 
             case "operation":
                 if (!existingOperation) {
-                    let operation = document.createElement("p");
-                    operation.textContent = target.value;
-                    firstNum = topScreen.textContent;
-                    topScreen.appendChild(operation);
-                    existingOperation = true;
-                    existingDecimal = false;
+                    if (topScreen.textContent.length > 0) {
+                        let operation = document.createElement("p");
+                        operation.textContent = target.value;
+                        firstNum = topScreen.textContent;
+                        topScreen.appendChild(operation);
+                        existingOperation = true;
+                        existingDecimal = false;
+                    }
                 }
                 break;
             

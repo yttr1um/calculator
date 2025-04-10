@@ -79,6 +79,6 @@ body {
     flex: 4;
 }
 
-.cancel {
+.cancel, .delete {
     background-color: red;
 }
