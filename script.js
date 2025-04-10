@@ -11,7 +11,8 @@ function calculate(problem) {
     //get the operation used in the problem.
     let operationUsed;
     operations.forEach(operation => {
-        if (problem.includes(operation)) {
+        //not include the first element in case its negative it doesn't break the whole code :3
+        if (problem.slice(1).includes(operation)) {
             operationUsed = operation;
         }
     })
