@@ -1,6 +1,5 @@
 let topScreen = document.querySelector("#top-screen");
 let outputScreen = document.querySelector("#output-screen");
-let screen = document.querySelector("#calc-screen");
 let buttons = document.querySelectorAll("button");
 let existingOperation =  false;
 let existingDecimal = false;
@@ -72,6 +71,7 @@ buttons.forEach(button => {
 
                 outputScreen.appendChild(outputValue);
                 break;
+                
 
             case "operation":
                 if (!existingOperation) {

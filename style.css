@@ -39,6 +39,7 @@ body {
 
 #top-screen {
     display: flex;
+    flex-wrap: wrap;
 }
 
 #output-screen {
