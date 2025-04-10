@@ -3,6 +3,7 @@ let outputScreen = document.querySelector("#output-screen");
 let screen = document.querySelector("#calc-screen");
 let buttons = document.querySelectorAll("button");
 let existingOperation =  false;
+let existingDecimal = false;
 let operations = ['+', '-', '*', '/'];
 
 function calculate(problem) {
@@ -43,7 +44,7 @@ function calculate(problem) {
 
     //check if a number is a float and return it with 1 dp.
     if (result%1 !== 0) {
-        return Math.round(result*1000)/1000;
+        return Math.round(result*10)/10;
     } else {
         return result;
     }
@@ -65,10 +66,10 @@ buttons.forEach(button => {
                 }
 
                 let problem = topScreen.textContent;
-                let result = document.createElement("p");
-                result.textContent = calculate(problem);
+                let outputValue = document.createElement("p");
+                outputValue.textContent = calculate(problem);
 
-                outputScreen.appendChild(result);
+                outputScreen.appendChild(outputValue);
                 break;
 
             case "operation":
@@ -78,6 +79,7 @@ buttons.forEach(button => {
                     firstNum = topScreen.textContent;
                     topScreen.appendChild(operation);
                     existingOperation = true;
+                    existingDecimal = false;
                 }
                 break;
             
@@ -91,14 +93,13 @@ buttons.forEach(button => {
                 })
 
                 existingOperation = false;
+                existingDecimal = false;
                 break;
 
             case "equal":
-                //has to clear the result screen incase theres already a result there.
-                // let problem = topScreen.textContent;
-                let outputValue = outputScreen.textContent
+                let result = outputScreen.textContent
 
-                //clearing the output screen.
+                //clearing the screen.
                 Array.from(topScreen.children).forEach(text => {
                     text.remove();
                 })
@@ -109,10 +110,19 @@ buttons.forEach(button => {
                 existingOperation = false;
 
                 let output = document.createElement("p");
-                output.textContent = outputValue;
+                output.textContent = result;
                 topScreen.appendChild(output);
                 break;
 
+
+            case "decimal":
+                if (!existingDecimal) {
+                    let decimal = document.createElement("p");
+                    decimal.textContent = target.value;
+                    topScreen.appendChild(decimal);
+                    existingDecimal = true;
+                }
+                break;
         }
     })
 })
